@@ -2,20 +2,43 @@
   // Use IntelliSense to learn about possible attributes.
   // Hover to view descriptions of existing attributes.
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+
+  // Configuration version
   "version": "0.2.0",
+
+  // List of debugging configurations
   "configurations": [
+
+    // Configuration for launching Chrome against localhost
     {
-      "type": "chrome",
-      "request": "launch",
-      "name": "Launch Chrome against localhost",
-      "url": "http://localhost:8080",
-      "webRoot": "${workspaceFolder}"
+      "type": "chrome",                // Specifies the debugger type as Chrome
+      "request": "launch",             // Indicates that Chrome should be launched
+      "name": "Launch Chrome against localhost", // Name of the configuration
+      "url": "http://localhost:8080",  // URL to be opened in Chrome
+      "webRoot": "${workspaceFolder}"  // Maps the workspace root to the web server root
     },
+
+    // Configuration for launching a Node.js program
+    {
+      "type": "node",                  // Specifies the debugger type as Node.js
+      "request": "launch",             // Indicates that Node.js should be launched
+      "name": "Launch Program",        // Name of the configuration
+      "program": "${workspaceFolder}/app.js", // Path to the Node.js program to be debugged
+      "cwd": "${workspaceFolder}",     // Sets the working directory for the Node.js program
+      "runtimeExecutable": "node",     // Specifies the runtime executable to be used
+      "skipFiles": ["<node_internals>/**"] // Skips debugging internal Node.js files
+    },
+
+    // Additional configuration for attaching to a running Node.js program using Chrome DevTools
     {
       "type": "node",
-      "request": "launch",
-      "name": "Launch Program",
-      "program": "${workspaceFolder}/app.js"
+      "request": "attach",
+      "name": "Attach to Node.js via Chrome DevTools",
+      "address": "localhost",
+      "port": 9229,                    // Default port for Node.js debugging
+      "restart": true,                 // Automatically restarts the session on reload
+      "protocol": "inspector",         // Specifies the debugging protocol to use
+      "skipFiles": ["<node_internals>/**"] // Skips debugging internal Node.js files
     }
   ]
 }
